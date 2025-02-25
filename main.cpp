@@ -14,7 +14,7 @@ vector<tuple<int,int,int>> ler_instancia(string file_name)
     ifstream file(file_name);
     vector<tuple<int,int,int>> processos;
     int chegada, pico;
-    int process_count = 1;
+    int process_count = 0;
     while(file >> chegada >> pico)
     {
         processos.push_back({process_count++, chegada, pico});
@@ -55,6 +55,8 @@ int main(int argc, char** argv)
 
     gant_retorno = FCFS(processos);
     print_gant(gant_retorno);
+    cout << "FCFS: ";
+    calcula_tempos(gant_retorno, ler_instancia(argv[1]));
 
 
     //SJF
@@ -63,6 +65,8 @@ int main(int argc, char** argv)
     print_processos(processos);
     gant_retorno = SJF(processos);
     print_gant(gant_retorno);
+    cout << "SJF: ";
+    calcula_tempos(gant_retorno, ler_instancia(argv[1]));
 
     //RR
     processos = ler_instancia(argv[1]);
@@ -70,6 +74,8 @@ int main(int argc, char** argv)
     print_processos(processos);
     gant_retorno = RR(processos);
     print_gant(gant_retorno);
+    cout << "RR: ";
+    calcula_tempos(gant_retorno, ler_instancia(argv[1]));
 
 
 }
