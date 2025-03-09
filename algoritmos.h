@@ -1,6 +1,8 @@
 #include <vector>
 #include <iostream>
 #include <limits>
+#include <locale>
+#include <iomanip>
 #include "aux.h"
 using namespace std;
 

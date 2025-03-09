@@ -136,5 +136,8 @@ void calcula_tempos(vector<tuple<int,int,int>> gant, vector<tuple<int,int,int>> 
     retorno = espera + p_total;
     resposta = resposta/n_processos;
 
-    cout << retorno << " " << resposta << " " << espera << endl;
+    std::locale::global(std::locale("pt_BR.utf8"));
+    std::cout.imbue(std::locale("pt_BR.utf8"));
+
+    cout << fixed << setprecision(1) << retorno << " " << resposta << " " << espera << endl;
 }
