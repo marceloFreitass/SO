@@ -13,18 +13,13 @@ int main(int argc, char** argv)
         return -1;
     }
 
+    // lendo instância 
     Data data = ler_instancia(argv[1]);
 
-    // for(int i = 0; i < data.referencias.size(); i++)
-    // {
-    //     cout << data.referencias[i] << " ";
-    // }
-    // cout << endl;
-    //cout << "MAIOR REF: " << data.maior_pag << endl;
-
-    //FIFO
+    // rodando algoritimos
     cout << "FIFO " << FIFO(data) << endl;
     cout << "OTM " << OTM(data) << endl;
     cout << "LRU " << LRU(data) << endl;
     
+    return 0;
 }
