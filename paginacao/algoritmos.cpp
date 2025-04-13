@@ -3,7 +3,7 @@
 int FIFO(Data& data)
 {
     // vetor que indica se a pagina já se encontra na memoria principal
-    vector<bool> esta_na_RAM(data.maior_pag, false);
+    vector<bool> esta_na_RAM(data.maior_pag+1, false);
     // vetor que representa a memoria principal
     queue<int> RAM;
     int qtd_referencias = data.referencias.size();
@@ -39,7 +39,7 @@ int FIFO(Data& data)
 int LRU(Data& data)
 {
     // vetor que indica se a pagina já se encontra na memoria principal
-    vector<bool> esta_na_RAM(data.maior_pag, false);
+    vector<bool> esta_na_RAM(data.maior_pag+1, false);
     // vetor que representa a memoria principal
     // quando a pagina é referenciada ela é movida para o final do vetor
     vector<int> RAM;
@@ -87,7 +87,7 @@ int LRU(Data& data)
 int OTM(Data& data)
 {
     // vetor que indica se a pagina já se encontra na memoria principal
-    vector<bool> esta_na_RAM(data.maior_pag, false);
+    vector<bool> esta_na_RAM(data.maior_pag+1, false);
     //vetor que representa a memoria principal
     vector<int> RAM;
     //vetor auxiliar
