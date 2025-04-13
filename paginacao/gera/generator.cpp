@@ -20,7 +20,7 @@ void generateInstance(int numFrames, int numJobs, const string &filename) {
 
   // Generate and write the job sequence
   for (int i = 0; i < numJobs; i++) {
-    int jobValue = (rand() % numJobs) + 1; // Random number between 1 and 10
+    int jobValue = (rand() % (numFrames * 3)) + 1; // Random number between 1 and 10
     outFile << jobValue << endl;
   }
 

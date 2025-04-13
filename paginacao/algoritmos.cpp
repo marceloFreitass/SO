@@ -86,50 +86,61 @@ int LRU(Data& data)
 
 int OTM(Data& data)
 {
+    // vetor que indica se a pagina já se encontra na memoria principal
     vector<bool> esta_na_RAM(data.maior_pag, false);
+    //vetor que representa a memoria principal
     vector<int> RAM;
+    //vetor auxiliar
     vector<int> copia_RAM;
+    RAM.reserve(data.qtd_frames);
+    copia_RAM.reserve(data.qtd_frames);
     int qtd_referencias = data.referencias.size();
+    //contador de falta de pagina  
     int falta_de_pag = 0;
     for(int i = 0; i < qtd_referencias; i++)
     {
+        //pagina sendo referenciada
         int pag = data.referencias[i];
-        // cout << "PAG: " << pag << endl;
+        //se a pagina nao estiver na memoria principal
         if(!esta_na_RAM[pag])
-        {
+        {   
+            //se a memoria principal estiver cheia
             if(RAM.size() == data.qtd_frames)
             {
+                //copia a RAM atual
                 copia_RAM = RAM;
+                //percorre as referencias posteriores
                 for(int j = i + 1; j < qtd_referencias; j++)
                 {
-
+                    //pagina futuramente referenciada
                     int pag_frente = data.referencias[j];
-                    // cout << "pag frente " << pag_frente << endl;
+                    //se a pagina posterior estiver na ram no momento
                     if(esta_na_RAM[pag_frente])
                     {
+                        //procuramos e retiramos ela do vetor auxiliar
                         auto encontrado = find(copia_RAM.begin(), copia_RAM.end(), pag_frente);
-                        if (*encontrado != pag_frente)
+                        //quando ja tivermos retirado a pagina do vetor auxiliar 
+                        if (encontrado == copia_RAM.end())
                             continue;
-                        // std::cout << "ENCONTROU: " << *encontrado << std::endl;
                         copia_RAM.erase(encontrado);
                     }
-                    // cout << "COPIA: ";
-                    // print_ram(copia_RAM);
-                    // getchar();
+                    //se restar apenas uma pagina no vetor auxiliar, essa sera a pagina substituida
                     if(copia_RAM.size() == 1)
                         break;
                 }
+                //procurado o indice da pagina a ser substituida na RAM
                 auto index_sai = find(RAM.begin(), RAM.end(), copia_RAM[0]);
                 esta_na_RAM[copia_RAM[0]] = false;
+                //removendo pagina
                 RAM.erase(index_sai);
             }
 
+
+            //colocando a pagina referenciada
             falta_de_pag++;
             esta_na_RAM[pag] = true;
             RAM.push_back(pag);
         }
-        // print_ram(RAM);
-        // getchar();
     }
     
     return falta_de_pag;
